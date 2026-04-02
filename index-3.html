@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shighra Coffee — Espresso Shot Pouch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --espresso: #1a0f0a;
+    --dark: #0d0806;
+    --cream: #f5ede0;
+    --teal: #3dbcb0;
+    --gold: #d4941a;
+    --gold-light: #f0b842;
+    --rust: #8b3a1c;
+    --text-muted: #7a6155;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px;
+    background: linear-gradient(to bottom, rgba(13,8,6,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-order {
+    background: var(--teal);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-order:hover { background: var(--gold-light); transform: scale(1.04); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 28px 60px;
+    text-align: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 30%, rgba(61,188,176,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(212,148,26,0.07) 0%, transparent 55%),
+      linear-gradient(160deg, #1a0f0a 0%, #0d0806 60%);
+  }
+  .hero-grain {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 480px; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 20vw, 120px);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+  .hero-title em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.55em;
+    display: block;
+    letter-spacing: 2px;
+    line-height: 1.4;
+  }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s ease forwards;
+  }
+  .hero-sub strong { color: var(--cream); font-weight: 400; }
+  .hero-cta-row {
+    margin-top: 36px;
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s ease forwards;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(245,237,224,0.2);
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-badge {
+    margin-top: 40px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fadeUp 0.8s 1s ease forwards;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  /* ── PRODUCTS ── */
+  #products {
+    padding: 80px 28px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 10vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 40px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .product-card {
+    background: linear-gradient(135deg, rgba(26,15,10,0.9), rgba(61,188,176,0.04));
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .product-card:hover { transform: translateY(-4px); border-color: rgba(61,188,176,0.3); }
+  .product-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+  .product-size {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .product-unit { font-size: 16px; color: var(--text-muted); }
+  .product-name {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .product-desc {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .product-tag {
+    display: inline-block;
+    margin-top: 14px;
+    background: rgba(61,188,176,0.12);
+    color: var(--teal);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  /* ── VIBE STRIP ── */
+  .vibe-strip {
+    overflow: hidden;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .vibe-track {
+    display: flex; gap: 40px;
+    animation: scrollLeft 20s linear infinite;
+    width: max-content;
+  }
+  .vibe-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .vibe-item span { color: var(--teal); font-size: 10px; }
+
+  /* ── WHY ── */
+  #why {
+    padding: 80px 28px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .why-grid { display: grid; gap: 16px; }
+  .why-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex; gap: 18px; align-items: flex-start;
+    transition: background 0.3s;
+  }
+  .why-card:hover { background: rgba(61,188,176,0.05); }
+  .why-icon {
+    font-size: 28px;
+    min-width: 44px; height: 44px;
+    display: grid; place-items: center;
+    background: rgba(61,188,176,0.1);
+    border-radius: 12px;
+  }
+  .why-title {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .why-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── HOW ── */
+  #how {
+    padding: 80px 28px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .steps { display: grid; gap: 0; }
+  .step {
+    display: flex; gap: 20px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px; top: 42px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+  }
+  .step-num {
+    min-width: 40px; height: 40px;
+    border: 1px solid var(--teal);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+  .step-title { font-weight: 500; font-size: 15px; margin-bottom: 6px; }
+  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── ORIGIN ── */
+  #origin {
+    padding: 80px 28px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .origin-card {
+    background: linear-gradient(135deg, rgba(212,148,26,0.08), rgba(61,188,176,0.05));
+    border: 1px solid rgba(212,148,26,0.2);
+    border-radius: 24px;
+    padding: 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .origin-bg-text {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.02);
+    bottom: -20px; right: -20px;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: 4px;
+  }
+  .origin-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+  .origin-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+  .origin-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .origin-desc strong { color: var(--cream); font-weight: 400; }
+  .origin-tags {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .origin-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── ORDER ── */
+  #order {
+    padding: 80px 28px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .order-card {
+    background: var(--teal);
+    border-radius: 24px;
+    padding: 40px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .order-card::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    top: -100px; right: -80px;
+  }
+  .order-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 3px;
+    color: var(--dark);
+    line-height: 1;
+    position: relative;
+  }
+  .order-sub {
+    font-size: 14px;
+    color: rgba(13,8,6,0.65);
+    margin-top: 10px;
+    line-height: 1.6;
+    position: relative;
+  }
+  .order-buttons {
+    margin-top: 28px;
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    position: relative;
+  }
+  .btn-wa {
+    background: var(--dark);
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-wa:hover { background: #111; transform: translateY(-2px); }
+  .btn-ig {
+    background: transparent;
+    border: 2px solid var(--dark);
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-ig:hover { background: rgba(13,8,6,0.1); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .footer-logo span { color: var(--teal); }
+  .footer-tagline {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .footer-note { font-size: 11px; color: rgba(122,97,85,0.5); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SHIGHRA<span>.</span></a>
+  <a href="#order" class="nav-order">Order Sekarang</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Espresso Shot Pouch · Banten, Indonesia</p>
+    <h1 class="hero-title">
+      SHIGHRA
+      <em>Coffee</em>
+    </h1>
+    <p class="hero-sub">
+      Espresso konsentrasi barista-grade dalam kemasan pouch 
+      <strong>praktis, portable, siap minum</strong> — tinggal campur, langsung gas.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#order" class="btn-primary">Pesan Sekarang</a>
+      <a href="#products" class="btn-secondary">Lihat Produk</a>
+    </div>
+    <div class="hero-badge">Single-Origin Arabica · Roasted in Serang</div>
+  </div>
+</section>
+
+<!-- VIBE STRIP -->
+<div class="vibe-strip">
+  <div class="vibe-track">
+    <div class="vibe-item">GRAB AND GO <span>✦</span></div>
+    <div class="vibe-item">BARISTA QUALITY <span>✦</span></div>
+    <div class="vibe-item">BANTEN ARABICA <span>✦</span></div>
+    <div class="vibe-item">ESPRESSO SHOT <span>✦</span></div>
+    <div class="vibe-item">PORTABLE POUCH <span>✦</span></div>
+    <div class="vibe-item">ROASTED IN SERANG <span>✦</span></div>
+    <!-- duplicate for loop -->
+    <div class="vibe-item">GRAB AND GO <span>✦</span></div>
+    <div class="vibe-item">BARISTA QUALITY <span>✦</span></div>
+    <div class="vibe-item">BANTEN ARABICA <span>✦</span></div>
+    <div class="vibe-item">ESPRESSO SHOT <span>✦</span></div>
+    <div class="vibe-item">PORTABLE POUCH <span>✦</span></div>
+    <div class="vibe-item">ROASTED IN SERANG <span>✦</span></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="reveal">
+    <p class="section-label">Pilihan Produk</p>
+    <h2 class="section-title">DUA UKURAN,<br>SATU RASA.</h2>
+  </div>
+  <div class="product-grid reveal">
+    <div class="product-card">
+      <div class="product-size">25<span class="product-unit">ml</span></div>
+      <div class="product-name">Mini Shot</div>
+      <div class="product-desc">Perfect buat yang butuh boost cepat. Satu tegukan konsentrasi penuh.</div>
+      <div class="product-tag">Single Serve</div>
+    </div>
+    <div class="product-card">
+      <div class="product-size">50<span class="product-unit">ml</span></div>
+      <div class="product-name">Full Shot</div>
+      <div class="product-desc">Versi full — bisa jadi base kopi susu, iced latte, atau diminum langsung.</div>
+      <div class="product-tag">Best Seller</div>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:13px; color:var(--text-muted); line-height:1.7;" class="reveal">
+    Tersedia paket bundling <strong style="color:var(--cream); font-weight:400;">3–5 pcs</strong> dengan harga spesial. Cocok buat ngopi bareng atau stok mingguan.
+  </p>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="reveal">
+    <p class="section-label">Kenapa Shighra?</p>
+    <h2 class="section-title">KOPI BAGUS<br>NGGAK HARUS<br>RIBET.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">⚡</div>
+      <div>
+        <div class="why-title">Grab-and-Go</div>
+        <div class="why-desc">Tinggal sobek, campur air atau susu. Nggak butuh alat seduh, nggak perlu antri.</div>
+      </div>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">☕</div>
+      <div>
+        <div class="why-title">Barista-Grade Quality</div>
+        <div class="why-desc">Diekstrak dari arabika pilihan dengan standar mesin espresso komersial dan SOP profesional.</div>
+      </div>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">💰</div>
+      <div>
+        <div class="why-title">Cost-Efficient</div>
+        <div class="why-desc">Lebih hemat dari coffee shop, tanpa kompromi rasa. Kopi enak nggak harus mahal.</div>
+      </div>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">🌿</div>
+      <div>
+        <div class="why-title">Sustainable Packaging</div>
+        <div class="why-desc">Pouch food-grade kedap udara — lebih ramah lingkungan dari plastik sekali pakai biasa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section id="how">
+  <div class="reveal">
+    <p class="section-label">Cara Pakai</p>
+    <h2 class="section-title">SEMUDAH<br>1, 2, 3.</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Buka pouching-nya</div>
+        <div class="step-desc">Putar tutup pouch, siap diseduh kapan saja dan di mana saja.</div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Campur sesuai selera</div>
+        <div class="step-desc">Tuang ke air panas, susu dingin, atau langsung minum — DIY sesuai mood lo.</div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Langsung gas ⚡</div>
+        <div class="step-desc">Nikmatin espresso quality tanpa drama. Perfect buat kampus, CFD, event, atau kerja.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section id="origin">
+  <div class="origin-card reveal">
+    <div class="origin-bg-text">BANTEN</div>
+    <div class="origin-sub">Single Origin</div>
+    <div class="origin-title">BANTEN ARABICA</div>
+    <p class="origin-desc" style="margin-top:16px;">
+      Biji arabika <strong>single-origin dari Banten</strong>, dipilih langsung dari roastery lokal terbaik dan di-roast di <strong>Serang, Indonesia</strong>. Rasa khas tanah sendiri, standar dunia.
+    </p>
+    <div class="origin-tags">
+      <span class="origin-tag">Premium Arabica</span>
+      <span class="origin-tag">Locally Roasted</span>
+      <span class="origin-tag">Banten Origin</span>
+      <span class="origin-tag">Serang, Indonesia</span>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order">
+  <div class="order-card reveal">
+    <div class="order-title">SIAP ORDER?</div>
+    <p class="order-sub">Pre-order via WhatsApp atau follow Instagram kami untuk info stok, promo, dan kolaborasi event.</p>
+    <div class="order-buttons">
+      <a href="https://wa.me/6287735352539?text=Halo%20Shighra%20Coffee!%20Saya%20mau%20order%20espresso%20shot%20pouch." class="btn-wa" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://www.instagram.com/shigracoffee?igsh=MXM0dmhsZ2ZsM3h0cg%3D%3D&utm_source=qr" class="btn-ig" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-muted);">
+    Tersedia juga untuk pesanan bulk event kampus & kantor. DM langsung ya!
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SHIGHRA<span>.</span></div>
+  <div class="footer-tagline">Espresso Concentrate Pouch · Barista Quality Beans</div>
+  <div class="footer-note">© 2025 Shighra Coffee · Jaseng Creative · Universitas Sultan Ageng Tirtayasa</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // stagger children
+        e.target.querySelectorAll('.why-card, .step, .product-card').forEach((el, i) => {
+          el.style.transitionDelay = `${i * 0.1}s`;
+          el.classList.add('visible');
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
